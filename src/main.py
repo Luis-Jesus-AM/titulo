@@ -5,23 +5,33 @@ from resumen import vista_resumen
 
 def main(page: ft.Page):
     page.title = "App Emprendedores"
-    page.window_width = 900
-    page.window_height = 600
+    page.window_width = 1000
+    page.window_height = 650
+    page.bgcolor = "#F5F7FA"
 
-    contenido = ft.Column()
+    # 🔥 crear vistas UNA sola vez
+    vista1 = vista_pedidos(page)
+    vista2 = vista_clientes(page)
+    vista3 = vista_resumen(page)
+
+    contenido = ft.Container(content=vista1, expand=True)
 
     def cambiar_vista(e):
         if e.control.selected_index == 0:
-            contenido.controls = [vista_pedidos()]
+            contenido.content = vista1
         elif e.control.selected_index == 1:
-            contenido.controls = [vista_clientes()]
+            contenido.content = vista2
         elif e.control.selected_index == 2:
-            contenido.controls = [vista_resumen()]
+            contenido.content = vista3
+
         page.update()
 
     menu = ft.NavigationRail(
         selected_index=0,
         label_type=ft.NavigationRailLabelType.ALL,
+        min_width=80,
+        extended=True,
+        bgcolor="#FFFFFF",
         destinations=[
             ft.NavigationRailDestination(
                 icon=ft.Icons.SHOPPING_CART,
@@ -39,14 +49,12 @@ def main(page: ft.Page):
         on_change=cambiar_vista
     )
 
-    contenido.controls = [vista_pedidos()]
-
     page.add(
         ft.Row(
             [
                 menu,
                 ft.VerticalDivider(width=1),
-                ft.Container(content=contenido, expand=True, padding=20)
+                contenido
             ],
             expand=True
         )
