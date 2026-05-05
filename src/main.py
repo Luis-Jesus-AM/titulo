@@ -2,6 +2,7 @@ import flet as ft
 from clientes import vista_clientes
 from pedidos import vista_pedidos
 from resumen import vista_resumen
+from proveedores import vista_proveedores   # 👈 importar proveedores
 
 def main(page: ft.Page):
     page.title = "App Emprendedores"
@@ -13,6 +14,7 @@ def main(page: ft.Page):
     vista1 = vista_pedidos(page)
     vista2 = vista_clientes(page)
     vista3 = vista_resumen(page)
+    vista4 = vista_proveedores(page)   # 👈 nueva vista
 
     contenido = ft.Container(content=vista1, expand=True)
 
@@ -23,6 +25,8 @@ def main(page: ft.Page):
             contenido.content = vista2
         elif e.control.selected_index == 2:
             contenido.content = vista3
+        elif e.control.selected_index == 3:   # 👈 manejar proveedores
+            contenido.content = vista4
 
         page.update()
 
@@ -35,7 +39,7 @@ def main(page: ft.Page):
         destinations=[
             ft.NavigationRailDestination(
                 icon=ft.Icons.SHOPPING_CART,
-                label="Pedidos"
+                label="Ventas"
             ),
             ft.NavigationRailDestination(
                 icon=ft.Icons.PEOPLE,
@@ -44,6 +48,10 @@ def main(page: ft.Page):
             ft.NavigationRailDestination(
                 icon=ft.Icons.BAR_CHART,
                 label="Resumen"
+            ),
+            ft.NavigationRailDestination(   # 👈 nuevo destino
+                icon=ft.Icons.WORK,
+                label="Proveedores"
             ),
         ],
         on_change=cambiar_vista

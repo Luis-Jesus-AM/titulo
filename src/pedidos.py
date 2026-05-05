@@ -54,7 +54,7 @@ def vista_pedidos(page: ft.Page):
         actualizar_lista()
 
         # 🔥 feedback pro
-        page.snack_bar = ft.SnackBar(ft.Text("Pedido agregado"))
+        page.snack_bar = ft.SnackBar(ft.Text("venta agregado"))
         page.snack_bar.open = True
         page.update()
 
@@ -67,12 +67,12 @@ def vista_pedidos(page: ft.Page):
     formulario = ft.Card(
         content=ft.Container(
             content=ft.Column([
-                ft.Text("Registrar pedido", size=18, weight="bold"),
+                ft.Text("Registrar venta", size=18, weight="bold"),
                 cliente,
                 producto,
                 precio,
                 ft.ElevatedButton(
-                    "Agregar Pedido",
+                    "Agregar Venta",
                     bgcolor=AZUL,
                     color="white",
                     style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)),
@@ -84,11 +84,11 @@ def vista_pedidos(page: ft.Page):
         )
     )
 
-    # 🔥 lista de pedidos en tarjeta
-    lista_pedidos = ft.Card(
+    # 🔥 lista de ventas en tarjeta
+    lista_ventas = ft.Card(
         content=ft.Container(
             content=ft.Column([
-                ft.Text("Pedidos recientes", size=18, weight="bold"),
+                ft.Text("Ventas recientes", size=18, weight="bold"),
                 lista
             ]),
             padding=20,
@@ -110,7 +110,7 @@ def vista_pedidos(page: ft.Page):
             ft.Row(
                 [
                     formulario,
-                    lista_pedidos
+                    lista_ventas
                 ],
                 spacing=20,
                 expand=True
